@@ -1,0 +1,22 @@
+{
+  "name": "wsl-usb-autobinder",
+  "version": "1.0.0",
+  "description": "A simple tool that binds usb devices for use in WSL automatically",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "tsc && node ./index.js",
+    "package": "tsc && nexe --target windows-x64-14.15.3 --name WSL-USB-AutoBinder"
+  },
+  "author": "Hayden Donald",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "nconf": "^0.12.0",
+    "@types/nconf": "^0.10.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "typescript": "^5.0.4"
+  }
+}

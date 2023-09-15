@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "outDir": ".",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "downlevelIteration": true,
+        "lib": [
+            "es2021"
+        ]
+    },
+    "exclude": []
+}
