@@ -9,7 +9,7 @@ This is a simple app that listens to usb devices and mounts them to WSL automati
 1. Install [usbipd-win](https://github.com/dorssel/usbipd-win) using [win-get](https://github.com/microsoft/winget-cli) using the following command `winget install usbipd`
 2. Check that it is working by running `usbipd list`. You should see some devices here (if plugged in)
 4. Run it for the first time so it can generate the configuration file
-3. Download the [executable]() and place it in the startup directory at `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` or you can just run it manually, up to you!
+3. Download the [executable](https://github.com/haydendonald/WSL-USB-Autobinder/releases) and place it in the startup directory at `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp` or you can just run it manually, up to you!
 5. Edit the configuration file to bind your usb devices, you can use `usbipd list` to see what devices are connected to your system
 
 # Configuration
