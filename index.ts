@@ -41,7 +41,13 @@ function loadConfig(): Promise<void> {
             }
 
             //Expected configuration options
-            validateConfig("devices", [{name: "Example Device", hwId: "067b:2303", connect: true}]);
+            var exampleDevice: Device = {
+                busId: "1-1.2",
+                hwId: "067b:2303",
+                name: "Example Device",
+                attached: false
+            };
+            validateConfig("devices", [exampleDevice]);
             validateConfig("distribution", "");
             validateConfig("debug", false);
             validateConfig("unbindAllAtStartup", true);
@@ -201,14 +207,14 @@ function updateDevices(): Promise<void> {
         //Find the devices that are different from the startup and mount them
         if (config.get("autoBindNewDevices")) {
             devices.forEach((device: Device, key: string) => {
-                var shouldBind = false;
-                config.get("devices").forEach((dev: string[]) => {
-                    if (dev[1] == device.hwId && dev[2] == "true") {
-                        shouldBind = true;
+                var shouldBind = !startupDevices.has(key);
+                config.get("devices").forEach((dev: Device) => {
+                    if (dev.hwId == device.hwId) {
+                        shouldBind = dev.attached;
                     }
                 });
 
-                if (!device.attached && (shouldBind || !startupDevices.has(key))) {
+                if (!device.attached && shouldBind) {
                     bindDevice(device.name, device.busId);
                     device.attached = true;
                 }
@@ -216,10 +222,10 @@ function updateDevices(): Promise<void> {
         }
 
         //Bind devices in the config file
-        config.get("devices").forEach((device: {name: string, hwId: string, connect: boolean}) => {
-            if (device.name != "Example Device" && device.connect) {
+        config.get("devices").forEach((device: Device) => {
+            if (device.name != "Example Device" && device.attached) {
                 devices.forEach((element: Device) => {
-                    if(element.hwId == device.hwId && element.attached == false) {
+                    if (element.hwId == device.hwId && element.attached == false) {
                         bindDevice(device.name, element.busId);
                     }
                 });
